@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Test Your Knowledge with Ram Sir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --bg:#0b1020; --bg2:#111733; --card:#161d3d; --card2:#1b2350;
+  --primary:#7c5cff; --primary2:#22d3ee; --accent:#f472b6;
+  --text:#e9ecff; --muted:#a4adcf; --good:#22c55e; --bad:#ef4444; --warn:#f59e0b;
+  --grad:linear-gradient(135deg,#7c5cff 0%,#22d3ee 100%);
+  --grad2:linear-gradient(135deg,#f472b6,#7c5cff);
+  --shadow:0 20px 60px -20px rgba(124,92,255,.45);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
+html,body{background:radial-gradient(1200px 600px at 10% -10%,#1d2150 0,transparent 60%),radial-gradient(1000px 500px at 110% 10%,#0e3b4a 0,transparent 60%),var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+a{color:var(--primary2);text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(11,16,32,.6);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
+.logo-icon{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;box-shadow:var(--shadow)}
+.logo-icon i{color:#fff}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.badge{padding:6px 12px;border-radius:999px;background:rgba(124,92,255,.18);color:#cfd1ff;font-size:12px;border:1px solid rgba(124,92,255,.4)}
+
+/* Hero */
+.hero{padding:60px 0 30px;text-align:center;position:relative}
+.hero h1{font-size:clamp(28px,5vw,52px);font-weight:800;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin-top:14px;color:var(--muted);font-size:clamp(14px,2vw,18px)}
+.hero .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+.pill{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-size:12px;color:#c8cffb}
+.pill i{margin-right:6px;color:var(--primary2)}
+
+/* Card */
+.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);margin:30px 0}
+.card h2{font-size:22px;margin-bottom:6px}
+.card .sub{color:var(--muted);margin-bottom:18px;font-size:14px}
+
+/* Form */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (max-width:680px){.grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;color:#cdd2f5;font-weight:500}
+.field label i{color:var(--primary2);margin-right:6px}
+.field input,.field select{background:#0f1535;border:1px solid rgba(255,255,255,.08);color:var(--text);padding:12px 14px;border-radius:12px;font-size:14px;outline:none;transition:.2s}
+.field input:focus,.field select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,92,255,.25)}
+.tech-title{margin-top:18px;font-weight:600}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:12px}
+.tech{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:#0f1535;border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.2s;font-size:13px;user-select:none}
+.tech i{color:var(--primary2)}
+.tech input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.tech.active{background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(34,211,238,.25));border-color:var(--primary)}
+.tech.active i{color:#fff}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;border:none;background:var(--grad);color:#fff;font-weight:600;font-size:15px;transition:.2s;box-shadow:var(--shadow)}
+.btn:hover{transform:translateY(-2px)}
+.btn.secondary{background:#1f2756;border:1px solid rgba(255,255,255,.1)}
+.btn.danger{background:linear-gradient(135deg,#ef4444,#f59e0b)}
+.row-end{display:flex;justify-content:flex-end;margin-top:18px;gap:10px;flex-wrap:wrap}
+
+/* Quiz */
+.quiz-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.qmeta{display:flex;gap:10px;flex-wrap:wrap}
+.chip{background:#0f1535;border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:10px;font-size:13px;color:#cfd2f5}
+.chip i{color:var(--primary2);margin-right:6px}
+.timer{font-weight:700;color:var(--warn)}
+.timer.danger{color:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.progress{height:8px;background:#0f1535;border-radius:99px;overflow:hidden;margin:10px 0 18px}
+.progress > div{height:100%;background:var(--grad);transition:width .3s}
+.qtext{font-size:18px;font-weight:600;margin-bottom:14px;line-height:1.4}
+.qtext .qno{color:var(--primary2);margin-right:6px}
+.options{display:grid;gap:10px}
+.opt{background:#0f1535;border:1px solid rgba(255,255,255,.08);padding:14px 16px;border-radius:12px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:12px;font-size:14px}
+.opt:hover{border-color:var(--primary)}
+.opt.selected{background:linear-gradient(135deg,rgba(124,92,255,.3),rgba(34,211,238,.2));border-color:var(--primary)}
+.opt .marker{width:26px;height:26px;border-radius:50%;background:#1b2350;display:grid;place-items:center;font-size:12px;font-weight:700;color:#cfd2f5;border:1px solid rgba(255,255,255,.1)}
+.opt.selected .marker{background:var(--grad);color:#fff;border-color:transparent}
+.textarea{width:100%;min-height:130px;background:#0f1535;border:1px solid rgba(255,255,255,.08);color:var(--text);padding:14px;border-radius:12px;font-size:14px;resize:vertical;outline:none;font-family:inherit}
+.textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,92,255,.25)}
+
+/* Result */
+.result-hero{text-align:center;padding:20px}
+.score-ring{--p:0;width:170px;height:170px;border-radius:50%;background:conic-gradient(var(--primary) calc(var(--p)*1%),#1b2350 0);display:grid;place-items:center;margin:0 auto 14px;position:relative}
+.score-ring::before{content:"";position:absolute;inset:12px;background:var(--card);border-radius:50%}
+.score-ring span{position:relative;font-size:34px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.verdict{font-size:24px;font-weight:700;margin-top:6px}
+.verdict.pass{color:var(--good)}
+.verdict.fail{color:var(--bad)}
+.motivation{margin:14px auto;max-width:640px;color:#dfe3ff;font-size:15px;line-height:1.6}
+.codepad{background:#0a0f24;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:left;font-family:'JetBrains Mono',Consolas,monospace;font-size:13px;color:#9be7d6;margin:14px 0;overflow-x:auto;white-space:pre}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px}
+.stat{background:#0f1535;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;text-align:center}
+.stat .num{font-size:22px;font-weight:700;color:var(--primary2)}
+.stat .lbl{color:var(--muted);font-size:12px;margin-top:4px}
+
+.hidden{display:none!important}
+.alert{padding:12px 14px;border-radius:10px;margin-top:10px;font-size:13px}
+.alert.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.4);color:#ffb4b4}
+.alert.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);color:#bff5cd}
+
+footer{text-align:center;padding:24px;color:var(--muted);font-size:13px}
+
+/* loader */
+.loader{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div>Ram Sir <span style="color:var(--primary2)">| Quiz</span></div>
+    </div>
+    <div class="nav-actions">
+      <span class="badge"><i class="fa-solid fa-bolt"></i> Live Test</span>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero container" id="heroSection">
+  <h1>Test Your Knowledge with Ram Sir</h1>
+  <p>Advanced & Intermediate level quiz across 20+ technologies. Random, no-repeat questions, timed challenges, instant evaluation.</p>
+  <div class="pills">
+    <span class="pill"><i class="fa-solid fa-shuffle"></i> Random Questions</span>
+    <span class="pill"><i class="fa-solid fa-clock"></i> 30s MCQ / 2m Written</span>
+    <span class="pill"><i class="fa-solid fa-trophy"></i> Pass at 85%</span>
+    <span class="pill"><i class="fa-solid fa-envelope"></i> Result on Email</span>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="container" id="formSection">
+  <div class="card">
+    <h2><i class="fa-solid fa-user-graduate" style="color:var(--primary2)"></i> Student Registration</h2>
+    <div class="sub">Fill in your details and pick the technologies you want to be tested on.</div>
+
+    <form id="studentForm" autocomplete="off">
+      <div class="grid">
+        <div class="field"><label><i class="fa-solid fa-user"></i>Full Name</label><input required name="name" placeholder="Your name"></div>
+        <div class="field"><label><i class="fa-solid fa-envelope"></i>Email</label><input required type="email" name="email" placeholder="you@example.com"></div>
+        <div class="field"><label><i class="fa-solid fa-phone"></i>Mobile Number</label><input required name="number" pattern="[0-9+ -]{7,15}" placeholder="10-digit mobile"></div>
+        <div class="field"><label><i class="fa-solid fa-school"></i>Class</label><input required name="class" placeholder="e.g. BCA / 12th / B.Tech 2nd"></div>
+        <div class="field"><label><i class="fa-solid fa-book"></i>Course</label><input required name="course" placeholder="e.g. Full Stack / Data Science"></div>
+        <div class="field"><label><i class="fa-solid fa-clock"></i>Batch Time</label>
+          <select required name="batch">
+            <option value="">Select batch time</option>
+            <option>Morning (8 - 10 AM)</option>
+            <option>Late Morning (10 - 12 PM)</option>
+            <option>Afternoon (12 - 2 PM)</option>
+            <option>Evening (4 - 6 PM)</option>
+            <option>Night (6 - 8 PM)</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column:1/-1"><label><i class="fa-solid fa-chalkboard-user"></i>Trainer Name</label><input required name="trainer" value="Ram Sir"></div>
+      </div>
+
+      <div class="tech-title"><i class="fa-solid fa-microchip" style="color:var(--primary2)"></i> Select Technologies (multiple allowed)</div>
+      <div class="tech-grid" id="techGrid"></div>
+
+      <div id="formAlert"></div>
+      <div class="row-end">
+        <button type="reset" class="btn secondary"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+        <button type="submit" class="btn"><i class="fa-solid fa-play"></i> Start Quiz</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="container hidden" id="quizSection">
+  <div class="card">
+    <div class="quiz-head">
+      <div class="qmeta">
+        <span class="chip" id="qTypeChip"><i class="fa-solid fa-list"></i> Objective</span>
+        <span class="chip"><i class="fa-solid fa-hashtag"></i> <span id="qProgress">1 / 1</span></span>
+        <span class="chip" id="qTechChip"><i class="fa-solid fa-microchip"></i> -</span>
+      </div>
+      <div class="chip"><i class="fa-solid fa-stopwatch"></i> <span class="timer" id="timer">00:30</span></div>
+    </div>
+    <div class="progress"><div id="progressBar" style="width:0%"></div></div>
+    <div class="qtext" id="qText">—</div>
+    <div id="qBody"></div>
+    <div class="row-end">
+      <button class="btn" id="nextBtn"><i class="fa-solid fa-arrow-right"></i> Next</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT -->
+<section class="container hidden" id="resultSection">
+  <div class="card result-hero">
+    <div class="score-ring" id="scoreRing"><span id="scoreText">0%</span></div>
+    <div class="verdict" id="verdict">—</div>
+    <div class="motivation" id="motivation"></div>
+    <div class="codepad" id="codePad"></div>
+    <div class="stats">
+      <div class="stat"><div class="num" id="sObj">0</div><div class="lbl">MCQ Correct</div></div>
+      <div class="stat"><div class="num" id="sWri">0</div><div class="lbl">Written Scored</div></div>
+      <div class="stat"><div class="num" id="sTotal">0</div><div class="lbl">Total Score</div></div>
+      <div class="stat"><div class="num" id="sTime">0s</div><div class="lbl">Time Taken</div></div>
+    </div>
+    <div id="emailAlert"></div>
+    <div class="row-end" style="justify-content:center">
+      <button class="btn secondary" onclick="location.reload()"><i class="fa-solid fa-rotate"></i> Try Again</button>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Ram Sir Quiz Platform · Built with ❤️ for learners</footer>
+
+<script>
+/* ============================================================
+   CONFIG
+   Replace WEB3FORMS_KEY with your own key from https://web3forms.com
+   ============================================================ */
+const WEB3FORMS_KEY = "ca4f3aca-3bf9-4a2a-9a30-e2cc475e7252";
+const PASS_PERCENT = 85;
+const MCQ_COUNT = 50;     // 50+ objective
+const WRITTEN_COUNT = 10; // 10+ written
+const MCQ_TIME = 30;      // seconds
+const WRITTEN_TIME = 120; // seconds
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ============================================================
+   TECHNOLOGIES
+   ============================================================ */
+const TECHS = [
+  {id:'html', name:'HTML', icon:'fa-brands fa-html5'},
+  {id:'css', name:'CSS', icon:'fa-brands fa-css3-alt'},
+  {id:'js', name:'JavaScript', icon:'fa-brands fa-js'},
+  {id:'c', name:'C', icon:'fa-solid fa-c'},
+  {id:'cpp', name:'C++', icon:'fa-solid fa-code'},
+  {id:'java', name:'Java', icon:'fa-brands fa-java'},
+  {id:'python', name:'Python', icon:'fa-brands fa-python'},
+  {id:'react', name:'React.js', icon:'fa-brands fa-react'},
+  {id:'node', name:'Node.js', icon:'fa-brands fa-node-js'},
+  {id:'express', name:'Express.js', icon:'fa-solid fa-server'},
+  {id:'mongo', name:'MongoDB', icon:'fa-solid fa-leaf'},
+  {id:'sql', name:'SQL', icon:'fa-solid fa-database'},
+  {id:'django', name:'Django', icon:'fa-solid fa-d'},
+  {id:'powerbi', name:'Power BI', icon:'fa-solid fa-chart-column'},
+  {id:'ai', name:'AI / ML', icon:'fa-solid fa-brain'},
+  {id:'prompt', name:'Prompt Engg.', icon:'fa-solid fa-wand-magic-sparkles'},
+  {id:'video', name:'Video Editing', icon:'fa-solid fa-video'},
+  {id:'datasci', name:'Data Science', icon:'fa-solid fa-chart-pie'},
+  {id:'analytics', name:'Data Analytics', icon:'fa-solid fa-magnifying-glass-chart'},
+  {id:'webdev', name:'Web Development', icon:'fa-solid fa-globe'},
+  {id:'sysdesign', name:'System Design', icon:'fa-solid fa-sitemap'},
+  {id:'gk', name:'Tech GK', icon:'fa-solid fa-lightbulb'},
+  {id:'devops', name:'DevOps', icon:'fa-solid fa-infinity'},
+  {id:'cloud', name:'Cloud (AWS/GCP)', icon:'fa-brands fa-aws'},
+  {id:'cyber', name:'Cybersecurity', icon:'fa-solid fa-shield-halved'},
+  {id:'git', name:'Git / GitHub', icon:'fa-brands fa-git-alt'},
+];
+
+/* ============================================================
+   QUESTION BANK (Advanced/Intermediate)
+   Each tech => mcq[] and written[]
+   mcq: {q, opts:[4], a: index}
+   written: {q, hint}
+   Aim: enough so 50 MCQ + 10 written can be sampled across selected techs
+   ============================================================ */
+const BANK = {
+html:{mcq:[
+ {q:"Which HTML5 element is most semantically correct for the main content area unique to the document?",opts:["<section>","<div>","<main>","<article>"],a:2},
+ {q:"What does the <template> tag do?",opts:["Renders immediately","Holds inert markup cloned via JS","Imports CSS","Defines a Web Component"],a:1},
+ {q:"Which attribute makes an input participate in form validation as required?",opts:["mandatory","required","validate","need"],a:1},
+ {q:"Which attribute defers script execution until DOM is parsed but preserves order?",opts:["async","defer","lazy","preload"],a:1},
+ {q:"Correct ARIA role for a clickable non-button element used as a button?",opts:["role='link'","role='button'","role='widget'","role='control'"],a:1},
+ {q:"Which element groups related options inside a <select>?",opts:["<group>","<optgroup>","<fieldset>","<legend>"],a:1},
+ {q:"Best meta tag for responsive design?",opts:["viewport","charset","robots","format-detection"],a:0},
+ {q:"Which input type provides a native date+time picker?",opts:["datetime","datetime-local","date-time","localdate"],a:1},
+ {q:"Which API allows offline asset caching for PWAs?",opts:["LocalStorage","Service Worker","WebSQL","IndexedDB"],a:1},
+ {q:"Shadow DOM primary purpose?",opts:["Faster rendering","Style + DOM encapsulation","SEO","Async loading"],a:1},
+],written:[
+ {q:"Explain difference between <section>, <article>, and <div> with use cases.",hint:"semantic vs generic container"},
+ {q:"Describe how the HTML parser handles async vs defer scripts.",hint:"execution order, DOM ready"},
+]},
+css:{mcq:[
+ {q:"Which CSS function creates a responsive font scale between two sizes?",opts:["calc()","clamp()","minmax()","scale()"],a:1},
+ {q:"In Flexbox, which property aligns items along the cross axis?",opts:["justify-content","align-items","align-content","flex-align"],a:1},
+ {q:"Grid: shorthand to define 3 equal columns?",opts:["grid:3","grid-template-columns:repeat(3,1fr)","columns:3","grid-cols:3"],a:1},
+ {q:"What does 'contain: layout' help with?",opts:["Style isolation","Performance: scopes layout work","Hides overflow","Disables paint"],a:1},
+ {q:"Stacking context is created by which?",opts:["display:block","position:relative without z-index","opacity < 1","float:left"],a:2},
+ {q:"Best way to override specificity without !important?",opts:["Inline styles","Increase selector specificity / cascade layers","Use :root","Use *"],a:1},
+ {q:":has() selector is known as?",opts:["Child selector","Parent selector","Sibling combinator","Pseudo-element"],a:1},
+ {q:"Which unit is relative to root font-size?",opts:["em","rem","%","vw"],a:1},
+ {q:"Which property enables GPU-accelerated transforms typically?",opts:["will-change","display","visibility","z-index"],a:0},
+ {q:"Container queries use which at-rule?",opts:["@media","@container","@supports","@layer"],a:1},
+],written:[
+ {q:"Compare Flexbox and Grid: when do you choose one over the other?",hint:"1D vs 2D layout"},
+ {q:"Explain CSS specificity calculation with an example.",hint:"a,b,c,d weights"},
+]},
+js:{mcq:[
+ {q:"Output of: console.log(typeof null)?",opts:["'null'","'object'","'undefined'","'number'"],a:1},
+ {q:"Which creates a true private field in a class?",opts:["_name","#name","private name","var name"],a:1},
+ {q:"Event loop processes microtasks…",opts:["Before next macrotask","After all macrotasks","Randomly","Never"],a:0},
+ {q:"What does Object.freeze do?",opts:["Deep immutability","Shallow immutability","Stops GC","Locks prototype only"],a:1},
+ {q:"Which method returns a new array without mutating?",opts:["sort()","reverse()","map()","push()"],a:2},
+ {q:"Promise.allSettled resolves when…",opts:["First fulfills","All settle (any state)","All fulfill","Any rejects"],a:1},
+ {q:"WeakMap keys must be?",opts:["Strings","Symbols","Objects","Numbers"],a:2},
+ {q:"Optional chaining operator?",opts:["??","?.","?:","??."],a:1},
+ {q:"What is hoisted?",opts:["let/const fully","var declarations only","Class declarations","Arrow functions"],a:1},
+ {q:"async function always returns?",opts:["undefined","A Promise","A Generator","A callback"],a:1},
+ {q:"Which is a pure function?",opts:["Math.random()","Date.now()","x=>x*2","console.log"],a:2},
+ {q:"Best way to deep-clone (modern, structured)?",opts:["JSON.parse(JSON.stringify())","Object.assign","structuredClone()","spread"],a:2},
+],written:[
+ {q:"Explain closures with a real-world example.",hint:"lexical scope, factory functions"},
+ {q:"Difference between == and === with coercion examples.",hint:"abstract vs strict equality"},
+]},
+c:{mcq:[
+ {q:"Size of int on most 64-bit systems (in bytes)?",opts:["2","4","8","Depends on compiler"],a:1},
+ {q:"Which storage class has file scope and internal linkage?",opts:["auto","static (at file scope)","extern","register"],a:1},
+ {q:"malloc returns?",opts:["void*","char*","int*","NULL only"],a:0},
+ {q:"Format specifier for size_t (C99+)?",opts:["%d","%zu","%lu","%u"],a:1},
+ {q:"What does 'volatile' tell the compiler?",opts:["Optimize aggressively","Do not cache reads","Mark constant","Mark thread-local"],a:1},
+ {q:"Difference between ++i and i++ as statements?",opts:["None","Pre vs post increment timing","Pre is slower","Post is undefined"],a:1},
+ {q:"Default return type if omitted in C90?",opts:["void","int","double","error"],a:1},
+],written:[
+ {q:"Explain pointers and pointer arithmetic with example.",hint:"address, dereference"},
+]},
+cpp:{mcq:[
+ {q:"Rule of Five members include?",opts:["ctor, dtor, copy, move, op=","ctor, dtor only","copy only","virtual only"],a:0},
+ {q:"std::unique_ptr is?",opts:["Shared","Move-only","Reference counted","Weak"],a:1},
+ {q:"Which is RAII?",opts:["Garbage collection","Resource tied to object lifetime","Manual free","Reference counting"],a:1},
+ {q:"constexpr means?",opts:["Runtime constant","Compile-time evaluable","Inline","Macro"],a:1},
+ {q:"Virtual destructor needed when?",opts:["Always","Polymorphic delete via base ptr","Never","Only with templates"],a:1},
+ {q:"std::move does what?",opts:["Copies","Casts to rvalue ref","Deletes","Swaps"],a:1},
+ {q:"Which container has O(1) average lookup?",opts:["std::map","std::vector","std::unordered_map","std::list"],a:2},
+],written:[
+ {q:"Differentiate references and pointers.",hint:"binding, null, rebind"},
+]},
+java:{mcq:[
+ {q:"Which is true about String in Java?",opts:["Mutable","Interned and immutable","Primitive","Always heap object"],a:1},
+ {q:"Functional interface marker?",opts:["@Override","@FunctionalInterface","@SafeVarargs","@Inherited"],a:1},
+ {q:"Stream operation that is terminal?",opts:["map","filter","collect","peek"],a:2},
+ {q:"Garbage collector freeing eligible objects: which area?",opts:["Stack","Method area","Heap","Registers"],a:2},
+ {q:"Which gives thread-safe lazy singleton?",opts:["Eager static","Double-checked locking with volatile","HashMap","synchronized field"],a:1},
+ {q:"Records are introduced in?",opts:["Java 8","Java 11","Java 14 (preview), 16 stable","Java 17 only"],a:2},
+ {q:"Checked vs unchecked exception base?",opts:["Throwable / Error","Exception / RuntimeException","Object / Throwable","Error / Exception"],a:1},
+],written:[
+ {q:"Explain JVM memory model briefly.",hint:"heap, stack, metaspace"},
+]},
+python:{mcq:[
+ {q:"Which creates a generator?",opts:["return","yield","async","await"],a:1},
+ {q:"GIL stands for?",opts:["Generic Iterable Loop","Global Interpreter Lock","Generated Index List","General Iter Lock"],a:1},
+ {q:"Difference between list and tuple?",opts:["Both mutable","Tuple immutable","List immutable","Tuple is dict"],a:1},
+ {q:"What does @staticmethod do?",opts:["Adds self","No self/cls","Adds cls","Singleton"],a:1},
+ {q:"Asyncio await works with?",opts:["Any function","Coroutines / awaitables","Generators only","Threads"],a:1},
+ {q:"Which is correct list comprehension?",opts:["[x for x in r]","{x for x in r}","(x for x in r)","All valid (list/set/gen)"],a:3},
+ {q:"PEP 8 recommends indentation of?",opts:["2 spaces","4 spaces","Tab","8 spaces"],a:1},
+ {q:"What does *args capture?",opts:["Keyword args","Positional args as tuple","Globals","Type hints"],a:1},
+],written:[
+ {q:"Explain decorators with example.",hint:"higher-order function"},
+ {q:"Difference between deepcopy and copy.",hint:"shallow vs deep"},
+]},
+react:{mcq:[
+ {q:"Which hook for memoizing functions?",opts:["useMemo","useCallback","useRef","useEffect"],a:1},
+ {q:"Keys in lists help with?",opts:["Styling","Reconciliation identity","Routing","State"],a:1},
+ {q:"Strict Mode does what in dev?",opts:["Disables errors","Double-invokes effects/renders to surface bugs","Enables SSR","Removes warnings"],a:1},
+ {q:"Context API best for?",opts:["High-frequency state","Theme/auth-like cross-cutting state","Replacing Redux always","Server data"],a:1},
+ {q:"useEffect with [] runs?",opts:["Every render","Once after mount","Never","Before render"],a:1},
+ {q:"Which is wrong about Server Components?",opts:["Run on server","Can use useState","Stream HTML","Reduce JS bundle"],a:1},
+ {q:"React.memo is for?",opts:["State","Avoiding re-render of pure components","Routing","Suspense"],a:1},
+],written:[
+ {q:"Explain virtual DOM and reconciliation.",hint:"diffing, fibers"},
+]},
+node:{mcq:[
+ {q:"Node.js is single-threaded but uses?",opts:["Threads always","libuv event loop / thread pool for I/O","Web workers only","Forks per request"],a:1},
+ {q:"Which is non-blocking?",opts:["fs.readFileSync","fs.readFile","JSON.parse","require"],a:1},
+ {q:"process.nextTick fires?",opts:["After I/O","Before next event loop phase","Same as setTimeout","On exit"],a:1},
+ {q:"Streams have which modes?",opts:["read/write","flowing/paused","sync/async","TCP/UDP"],a:1},
+ {q:"Cluster module helps with?",opts:["Async/await","Multi-core scaling","Caching","SSR"],a:1},
+],written:[
+ {q:"Explain the Node.js event loop phases.",hint:"timers, pending, poll, check"},
+]},
+express:{mcq:[
+ {q:"Order of middlewares matters because?",opts:["Random","Executed in declaration order","Alphabetical","By route"],a:1},
+ {q:"Error-handling middleware signature has how many args?",opts:["2","3","4","5"],a:2},
+ {q:"app.use('/api', router) does?",opts:["Mounts router","Renders view","Creates DB","Logs"],a:0},
+ {q:"Which sends JSON?",opts:["res.send()","res.json()","res.end()","res.write()"],a:1},
+ {q:"Which protects against common HTTP headers issues?",opts:["cors","helmet","morgan","body-parser"],a:1},
+],written:[
+ {q:"Explain middleware in Express with example.",hint:"req, res, next"},
+]},
+mongo:{mcq:[
+ {q:"MongoDB stores data as?",opts:["Rows","BSON documents","XML","CSV"],a:1},
+ {q:"Which stage filters in aggregation?",opts:["$group","$match","$project","$sort"],a:1},
+ {q:"Index on a field improves?",opts:["Writes","Read query speed","Storage","Replication"],a:1},
+ {q:"Replica set primary handles?",opts:["Reads only","Writes (and reads)","Backups only","Sharding"],a:1},
+ {q:"Which is multi-document ACID?",opts:["Never","Yes since 4.0 (replica) / 4.2 (sharded)","Only single doc","Only with SQL"],a:1},
+],written:[
+ {q:"Compare embedding vs referencing in MongoDB schema design.",hint:"1:few vs 1:many"},
+]},
+sql:{mcq:[
+ {q:"Which JOIN returns all from left + matching from right?",opts:["INNER","LEFT","RIGHT","FULL"],a:1},
+ {q:"Which clause filters AFTER aggregation?",opts:["WHERE","HAVING","GROUP BY","ORDER BY"],a:1},
+ {q:"Index type best for range queries?",opts:["Hash","B-Tree","Bitmap","Full-text"],a:1},
+ {q:"Normal form removing transitive dependency?",opts:["1NF","2NF","3NF","BCNF"],a:2},
+ {q:"Which prevents SQL injection best?",opts:["String concat","Parameterized queries","Escaping quotes","Stored only"],a:1},
+ {q:"ACID 'I' means?",opts:["Index","Isolation","Integrity","Inheritance"],a:1},
+ {q:"Window function example?",opts:["SUM(x)","ROW_NUMBER() OVER(...)","COUNT(*)","AVG(x)"],a:1},
+],written:[
+ {q:"Explain difference between WHERE and HAVING.",hint:"row vs group filter"},
+]},
+django:{mcq:[
+ {q:"Django follows which pattern?",opts:["MVC","MVT","MVVM","MV"],a:1},
+ {q:"ORM migration command?",opts:["makemigrations","migrateall","syncdb","schema"],a:0},
+ {q:"Settings file env var?",opts:["DJANGO_SETTINGS_MODULE","DJANGO_ENV","SETTINGS","CONFIG_PATH"],a:0},
+ {q:"CSRF token middleware purpose?",opts:["Auth","Prevent cross-site request forgery","Logging","Caching"],a:1},
+ {q:"select_related vs prefetch_related?",opts:["Same","SQL JOIN vs separate queries","Cache vs DB","Eager vs lazy only"],a:1},
+],written:[
+ {q:"Explain MVT in Django.",hint:"Model, View, Template"},
+]},
+powerbi:{mcq:[
+ {q:"DAX stands for?",opts:["Data Analytics eXpression","Data Analysis eXpressions","Dynamic Axis","Direct Access X"],a:1},
+ {q:"Which is row-context?",opts:["FILTER","CALCULATE","Iterators like SUMX","ALL"],a:2},
+ {q:"Star schema has?",opts:["Many fact tables","One fact + dim tables","No relationships","Only dims"],a:1},
+ {q:"Which mode keeps data live?",opts:["Import","DirectQuery","Dual","Composite"],a:1},
+ {q:"Power Query language?",opts:["DAX","M","SQL","Python"],a:1},
+],written:[
+ {q:"Explain difference between calculated column and measure.",hint:"row vs filter context"},
+]},
+ai:{mcq:[
+ {q:"Which is supervised learning?",opts:["K-Means","Linear Regression","DBSCAN","PCA"],a:1},
+ {q:"Overfitting is reduced by?",opts:["More features","Regularization / more data","Higher LR","Removing validation"],a:1},
+ {q:"Activation enabling non-linearity?",opts:["Linear","ReLU","Identity","None"],a:1},
+ {q:"Transformer key mechanism?",opts:["Convolution","Recurrence","Self-attention","Pooling"],a:2},
+ {q:"Bias-variance trade-off: high bias means?",opts:["Overfits","Underfits","Perfect","Random"],a:1},
+ {q:"Which metric for imbalanced classification?",opts:["Accuracy","F1 / PR-AUC","MSE","R²"],a:1},
+],written:[
+ {q:"Explain bias-variance trade-off.",hint:"underfit vs overfit"},
+]},
+prompt:{mcq:[
+ {q:"Few-shot prompting means?",opts:["No examples","Several examples in prompt","Fine-tuning","RLHF"],a:1},
+ {q:"Chain-of-thought helps with?",opts:["Speed","Multi-step reasoning","Token cost","Image gen"],a:1},
+ {q:"System prompt purpose?",opts:["User input","Set assistant behavior/role","Replace model","Stream output"],a:1},
+ {q:"Temperature 0 means?",opts:["Most random","Most deterministic","Disabled","Errors"],a:1},
+ {q:"RAG stands for?",opts:["Retrieval Augmented Generation","Rapid AI Gen","Recursive Auto Gen","Random Agent Graph"],a:0},
+],written:[
+ {q:"Write a strong prompt structure: role, context, task, format.",hint:"clear, structured"},
+]},
+video:{mcq:[
+ {q:"24fps gives which look?",opts:["TV","Cinematic","Sports","Slow-mo"],a:1},
+ {q:"Which is a non-destructive editor concept?",opts:["Direct file overwrite","Proxy & timeline edits","In-place encode","Frame deletion"],a:1},
+ {q:"Color grading vs correction?",opts:["Same","Correction = neutral; grading = stylize","Grading first","Both audio"],a:1},
+ {q:"H.264 is a?",opts:["Container","Codec","Color space","Format only"],a:1},
+ {q:"LUT is used for?",opts:["Audio","Color transformation","Captions","Render speed"],a:1},
+],written:[
+ {q:"Explain difference between cut, J-cut, and L-cut.",hint:"audio/video lead/lag"},
+]},
+datasci:{mcq:[
+ {q:"Pandas Series is?",opts:["2D","1D labeled array","Dict only","Tensor"],a:1},
+ {q:"Which is dimensionality reduction?",opts:["KNN","PCA","SVM","DT"],a:1},
+ {q:"Train/test split prevents?",opts:["Bias","Data leakage / overfit measurement","Speed","Memory"],a:1},
+ {q:"Cross-validation helps?",opts:["Tune hyperparams reliably","Increase data","Replace test","None"],a:0},
+ {q:"Which handles missing data in pandas?",opts:["fillna()","drop()","reset_index()","melt()"],a:0},
+],written:[
+ {q:"Explain feature engineering with one example.",hint:"derived features, encoding"},
+]},
+analytics:{mcq:[
+ {q:"KPI means?",opts:["Key Process Index","Key Performance Indicator","Known Process Item","Key Project Idea"],a:1},
+ {q:"Best chart for trend over time?",opts:["Pie","Line","Donut","Treemap"],a:1},
+ {q:"Cohort analysis groups users by?",opts:["Random","Shared characteristic over time","Geography only","Income only"],a:1},
+ {q:"Which is descriptive analytics?",opts:["What happened","Why it happened","What will happen","What to do"],a:0},
+ {q:"Funnel analysis best for?",opts:["Conversion drop-off","Trends","Outliers","Heatmaps"],a:0},
+],written:[
+ {q:"Differentiate descriptive, diagnostic, predictive, prescriptive analytics.",hint:"4 types"},
+]},
+webdev:{mcq:[
+ {q:"CORS is enforced by?",opts:["Server","Browser","DNS","CDN"],a:1},
+ {q:"HTTP/2 key feature?",opts:["Text protocol","Multiplexing streams","No headers","UDP"],a:1},
+ {q:"REST is?",opts:["Protocol","Architectural style","DB","Library"],a:1},
+ {q:"JWT consists of?",opts:["Header.Payload.Signature","Body.Header","Token only","Cookie+Header"],a:0},
+ {q:"Which status is 'Unauthorized'?",opts:["400","401","403","404"],a:1},
+ {q:"WebSocket is?",opts:["HTTP polling","Full-duplex persistent","SSE","Long polling"],a:1},
+],written:[
+ {q:"Explain difference between authentication and authorization.",hint:"identity vs permission"},
+]},
+sysdesign:{mcq:[
+ {q:"CAP theorem trade-off during partition?",opts:["C and A","C or A","A and P always","None"],a:1},
+ {q:"Cache invalidation strategies include?",opts:["Write-through","TTL","LRU eviction","All of these"],a:3},
+ {q:"Which DB is best for high-write timeseries?",opts:["PostgreSQL","MongoDB","InfluxDB / TimescaleDB","Redis"],a:2},
+ {q:"Load balancer at L7 routes by?",opts:["IP only","HTTP attributes (path/header)","TCP only","UDP"],a:1},
+ {q:"Idempotent HTTP method?",opts:["POST","PUT","PATCH","CONNECT"],a:1},
+ {q:"CDN primarily improves?",opts:["DB writes","Static asset latency","Auth","Compute"],a:1},
+],written:[
+ {q:"Design a URL shortener: list main components.",hint:"hashing, DB, cache, redirect"},
+]},
+gk:{mcq:[
+ {q:"Who is known as the father of computers?",opts:["Alan Turing","Charles Babbage","John von Neumann","Linus Torvalds"],a:1},
+ {q:"Linux kernel created by?",opts:["Linus Torvalds","Richard Stallman","Ken Thompson","Dennis Ritchie"],a:0},
+ {q:"GitHub was acquired by?",opts:["Google","Microsoft","Amazon","Oracle"],a:1},
+ {q:"Which company created TypeScript?",opts:["Google","Microsoft","Facebook","Mozilla"],a:1},
+ {q:"OpenAI is best known for?",opts:["Search engine","LLMs like GPT","DBs","Hardware"],a:1},
+ {q:"HTTP runs by default on port?",opts:["21","22","80","443"],a:2},
+],written:[
+ {q:"Name 3 modern AI tools and their primary use.",hint:"ChatGPT, Midjourney, Copilot, etc."},
+]},
+devops:{mcq:[
+ {q:"CI stands for?",opts:["Continuous Integration","Code Inspection","Compile Iteration","Cluster Init"],a:0},
+ {q:"Docker image vs container?",opts:["Same","Image is template; container is running instance","Container builds image","Image is running"],a:1},
+ {q:"K8s smallest deployable unit?",opts:["Node","Pod","Service","Deployment"],a:1},
+ {q:"IaC tool example?",opts:["Terraform","Photoshop","Excel","VS Code"],a:0},
+ {q:"Blue-green deployment goal?",opts:["Cost saving","Zero-downtime release","Backup","Branching"],a:1},
+],written:[
+ {q:"Explain CI/CD pipeline stages.",hint:"build, test, deploy"},
+]},
+cloud:{mcq:[
+ {q:"AWS S3 is?",opts:["Compute","Object storage","Block storage","DB"],a:1},
+ {q:"Lambda is?",opts:["VM","Serverless function","Container service","Queue"],a:1},
+ {q:"VPC stands for?",opts:["Virtual Private Cloud","Verified Public Channel","Variable Process Core","Virtual Public Cluster"],a:0},
+ {q:"IAM is for?",opts:["Storage","Access management","Networking","Billing only"],a:1},
+ {q:"GCP equivalent of S3?",opts:["Cloud Storage","BigQuery","Spanner","Compute Engine"],a:0},
+],written:[
+ {q:"Differentiate IaaS, PaaS, SaaS with examples.",hint:"abstraction levels"},
+]},
+cyber:{mcq:[
+ {q:"OWASP Top 1 (recent) is often?",opts:["XSS","Broken Access Control","CSRF","SQLi"],a:1},
+ {q:"Hashing vs encryption?",opts:["Same","Hash one-way; encryption reversible","Encryption one-way","Hash reversible"],a:1},
+ {q:"MFA adds?",opts:["Speed","Additional auth factor","Encryption","Logging"],a:1},
+ {q:"XSS is mitigated by?",opts:["Output encoding & CSP","Bigger DB","Faster CPU","HTTPS only"],a:0},
+ {q:"Symmetric algorithm example?",opts:["RSA","AES","ECDSA","DH"],a:1},
+],written:[
+ {q:"Explain SQL injection and how to prevent it.",hint:"prepared statements"},
+]},
+git:{mcq:[
+ {q:"Which creates a branch & switches to it?",opts:["git branch x","git checkout x","git switch -c x","git merge x"],a:2},
+ {q:"git rebase vs merge?",opts:["Same","Rebase rewrites history; merge preserves","Merge rewrites","Rebase only fast-forwards"],a:1},
+ {q:"Undo last commit (keep changes staged)?",opts:["git reset --hard HEAD~1","git reset --soft HEAD~1","git revert","git clean -f"],a:1},
+ {q:"git stash does?",opts:["Deletes work","Saves dirty state temporarily","Tags release","Rebases"],a:1},
+ {q:"Pull request is a?",opts:["Git command","Platform-level review/merge request","Hook","Submodule"],a:1},
+],written:[
+ {q:"Explain difference between git fetch and git pull.",hint:"download vs download+merge"},
+]},
+};
+
+/* ============================================================
+   RENDER TECH GRID
+   ============================================================ */
+const techGrid = document.getElementById('techGrid');
+TECHS.forEach(t=>{
+  const lbl = document.createElement('label');
+  lbl.className='tech';
+  lbl.innerHTML = `<i class="${t.icon}"></i><span>${t.name}</span><input type="checkbox" value="${t.id}">`;
+  const inp = lbl.querySelector('input');
+  inp.addEventListener('change',()=>lbl.classList.toggle('active', inp.checked));
+  techGrid.appendChild(lbl);
+});
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let student = null;
+let quizQueue = [];      // mixed objective then written
+let currentIdx = 0;
+let answers = [];        // {type, tech, q, opts, correctIdx, userIdx, userText}
+let timerHandle = null;
+let timeLeft = 0;
+let startTime = 0;
+
+/* ============================================================
+   FORM SUBMIT
+   ============================================================ */
+document.getElementById('studentForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const form = e.target;
+  const data = Object.fromEntries(new FormData(form).entries());
+  const techs = [...form.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.value);
+  const alertBox = document.getElementById('formAlert');
+  alertBox.innerHTML = '';
+  if(techs.length===0){
+    alertBox.innerHTML = `<div class="alert err"><i class="fa-solid fa-triangle-exclamation"></i> Please select at least one technology.</div>`;
+    return;
+  }
+  data.techs = techs;
+  student = data;
+  buildQuiz(techs);
+  if(quizQueue.length === 0){
+    alertBox.innerHTML = `<div class="alert err"><i class="fa-solid fa-triangle-exclamation"></i> No questions available for selected technologies.</div>`;
+    return;
+  }
+  document.getElementById('formSection').classList.add('hidden');
+  document.getElementById('heroSection').classList.add('hidden');
+  document.getElementById('quizSection').classList.remove('hidden');
+  startTime = Date.now();
+  showQuestion();
+});
+
+/* ============================================================
+   BUILD QUIZ — random, no repeats, distributed across techs
+   ============================================================ */
+function shuffle(arr){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function buildQuiz(techs){
+  // Pool MCQs and Writtens with tech tag, no repeats
+  const mcqPool=[]; const wriPool=[];
+  techs.forEach(t=>{
+    const b = BANK[t]; if(!b) return;
+    (b.mcq||[]).forEach(q=> mcqPool.push({...q, tech:t, type:'mcq'}));
+    (b.written||[]).forEach(q=> wriPool.push({...q, tech:t, type:'written'}));
+  });
+  // Also shuffle option order per question while remembering correct
+  const mcqShuffled = shuffle(mcqPool).slice(0, MCQ_COUNT).map(item=>{
+    const idx = item.opts.map((_,i)=>i);
+    const order = shuffle(idx);
+    const newOpts = order.map(i=>item.opts[i]);
+    const newA = order.indexOf(item.a);
+    return {...item, opts:newOpts, a:newA};
+  });
+  const wriShuffled = shuffle(wriPool).slice(0, WRITTEN_COUNT);
+  quizQueue = [...mcqShuffled, ...wriShuffled];
+  answers = quizQueue.map(()=>null);
+  currentIdx = 0;
+}
+
+/* ============================================================
+   SHOW QUESTION
+   ============================================================ */
+function techName(id){ return (TECHS.find(t=>t.id===id)||{}).name || id; }
+
+function showQuestion(){
+  clearInterval(timerHandle);
+  const total = quizQueue.length;
+  const q = quizQueue[currentIdx];
+  document.getElementById('qProgress').textContent = `${currentIdx+1} / ${total}`;
+  document.getElementById('progressBar').style.width = `${((currentIdx)/total)*100}%`;
+  document.getElementById('qTechChip').innerHTML = `<i class="fa-solid fa-microchip"></i> ${techName(q.tech)}`;
+  document.getElementById('qTypeChip').innerHTML = q.type==='mcq'
+    ? `<i class="fa-solid fa-list"></i> Objective`
+    : `<i class="fa-solid fa-pen"></i> Written`;
+  document.getElementById('qText').innerHTML = `<span class="qno">Q${currentIdx+1}.</span> ${q.q}`;
+
+  const body = document.getElementById('qBody');
+  body.innerHTML = '';
+  if(q.type==='mcq'){
+    const wrap = document.createElement('div'); wrap.className='options';
+    q.opts.forEach((opt,i)=>{
+      const div = document.createElement('div');
+      div.className='opt';
+      div.innerHTML = `<div class="marker">${String.fromCharCode(65+i)}</div><div>${opt}</div>`;
+      div.onclick = ()=>{
+        wrap.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+        div.classList.add('selected');
+        answers[currentIdx] = {type:'mcq', tech:q.tech, q:q.q, opts:q.opts, correctIdx:q.a, userIdx:i};
+      };
+      wrap.appendChild(div);
+    });
+    body.appendChild(wrap);
+    timeLeft = MCQ_TIME;
+  } else {
+    const ta = document.createElement('textarea');
+    ta.className='textarea';
+    ta.placeholder = 'Write your 2-line answer here…';
+    ta.oninput = ()=>{
+      answers[currentIdx] = {type:'written', tech:q.tech, q:q.q, hint:q.hint||'', userText:ta.value};
+    };
+    body.appendChild(ta);
+    timeLeft = WRITTEN_TIME;
+  }
+  document.getElementById('nextBtn').innerHTML = currentIdx === total-1
+    ? `<i class="fa-solid fa-flag-checkered"></i> Finish`
+    : `<i class="fa-solid fa-arrow-right"></i> Next`;
+  startTimer();
+}
+
+function startTimer(){
+  updateTimerLabel();
+  timerHandle = setInterval(()=>{
+    timeLeft--;
+    updateTimerLabel();
+    if(timeLeft<=0){ clearInterval(timerHandle); goNext(true); }
+  },1000);
+}
+function updateTimerLabel(){
+  const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+  const s = String(timeLeft%60).padStart(2,'0');
+  const t = document.getElementById('timer');
+  t.textContent = `${m}:${s}`;
+  t.classList.toggle('danger', timeLeft<=5);
+}
+
+document.getElementById('nextBtn').addEventListener('click', ()=>goNext(false));
+
+function goNext(timedOut){
+  // ensure unanswered captured
+  if(answers[currentIdx]==null){
+    const q = quizQueue[currentIdx];
+    answers[currentIdx] = q.type==='mcq'
+      ? {type:'mcq', tech:q.tech, q:q.q, opts:q.opts, correctIdx:q.a, userIdx:-1}
+      : {type:'written', tech:q.tech, q:q.q, hint:q.hint||'', userText:''};
+  }
+  if(currentIdx < quizQueue.length-1){
+    currentIdx++;
+    showQuestion();
+  } else {
+    clearInterval(timerHandle);
+    finishQuiz();
+  }
+}
+
+/* ============================================================
+   FINISH & SCORE
+   Combined % across MCQ + Written
+   - MCQ: 1 point each (correct/wrong)
+   - Written: heuristic — 1 point if length >= 40 chars and contains
+              at least 1 keyword from the hint; else 0.5 if length>=20 else 0
+   Total% = (mcqCorrect + writtenScore) / (totalMCQ + totalWritten) * 100
+   ============================================================ */
+function evaluateWritten(ans){
+  const t = (ans.userText||'').trim();
+  if(t.length<20) return 0;
+  const hint = (ans.hint||'').toLowerCase();
+  const keys = hint.split(/[,;\s]+/).filter(w=>w.length>3);
+  const lc = t.toLowerCase();
+  const hits = keys.filter(k=>lc.includes(k)).length;
+  if(t.length>=40 && (hits>=1 || keys.length===0)) return 1;
+  if(t.length>=20) return 0.5;
+  return 0;
+}
+
+function finishQuiz(){
+  const totalMcq = answers.filter(a=>a.type==='mcq').length;
+  const totalWri = answers.filter(a=>a.type==='written').length;
+  let mcqCorrect = 0, wriScore = 0;
+  answers.forEach(a=>{
+    if(a.type==='mcq'){ if(a.userIdx===a.correctIdx) mcqCorrect++; }
+    else { wriScore += evaluateWritten(a); }
+  });
+  const totalQ = totalMcq + totalWri;
+  const percent = Math.round(((mcqCorrect + wriScore) / totalQ) * 100);
+  const passed = percent >= PASS_PERCENT;
+  const timeTaken = Math.round((Date.now()-startTime)/1000);
+
+  showResult({percent, passed, mcqCorrect, totalMcq, wriScore, totalWri, totalQ, timeTaken});
+  sendEmail({percent, passed, mcqCorrect, totalMcq, wriScore, totalWri, timeTaken});
+}
+
+function showResult(r){
+  document.getElementById('quizSection').classList.add('hidden');
+  document.getElementById('resultSection').classList.remove('hidden');
+  const ring = document.getElementById('scoreRing');
+  ring.style.setProperty('--p', r.percent);
+  document.getElementById('scoreText').textContent = r.percent + '%';
+  const verdict = document.getElementById('verdict');
+  verdict.textContent = r.passed ? `🎉 Passed! Well done, ${student.name.split(' ')[0]}` : `😕 Didn't pass — keep going, ${student.name.split(' ')[0]}`;
+  verdict.className = 'verdict ' + (r.passed?'pass':'fail');
+
+  document.getElementById('motivation').innerHTML = r.passed
+    ? `You scored <b>${r.percent}%</b> — above the ${PASS_PERCENT}% pass mark. Consistency built this. Keep shipping projects, keep teaching others, keep going.`
+    : `You scored <b>${r.percent}%</b>. The pass mark is ${PASS_PERCENT}%. This is feedback, not failure. Revise your weak topics, attempt more problems daily, and re-take the quiz. Practice beats talent when talent doesn't practice.`;
+
+  document.getElementById('codePad').textContent = r.passed
+? `// motivation.js
+const result = "passed";
+while (result === "passed") {
+  keepLearning();
+  buildProjects();
+  helpOthers();
+  // success compounds.
+}`
+: `// growth.js
+function bounceBack() {
+  revise(weakTopics);
+  practice(daily=true);
+  retry();
+  return "stronger";
+}
+console.log(bounceBack()); // never give up.`;
+
+  document.getElementById('sObj').textContent = `${r.mcqCorrect}/${r.totalMcq}`;
+  document.getElementById('sWri').textContent = `${r.wriScore}/${r.totalWri}`;
+  document.getElementById('sTotal').textContent = r.percent + '%';
+  document.getElementById('sTime').textContent = r.timeTaken + 's';
+}
+
+/* ============================================================
+   EMAIL via Web3Forms
+   Sends student details + every question with student's answer
+   AND the correct answer (MCQ) / hint (written)
+   ============================================================ */
+async function sendEmail(r){
+  const alertBox = document.getElementById('emailAlert');
+  if(!WEB3FORMS_KEY || WEB3FORMS_KEY==="YOUR_WEB3FORMS_ACCESS_KEY"){
+    alertBox.innerHTML = `<div class="alert err"><i class="fa-solid fa-key"></i> Replace WEB3FORMS_KEY in the HTML with your Web3Forms access key to receive emails.</div>`;
+    return;
+  }
+  alertBox.innerHTML = `<div class="alert ok"><span class="loader"></span> Sending result to email…</div>`;
+
+  let body = '';
+  body += `=== STUDENT DETAILS ===\n`;
+  body += `Name   : ${student.name}\nEmail  : ${student.email}\nMobile : ${student.number}\nClass  : ${student.class}\nCourse : ${student.course}\nBatch  : ${student.batch}\nTrainer: ${student.trainer}\nTechs  : ${student.techs.map(techName).join(', ')}\n\n`;
+  body += `=== RESULT ===\n`;
+  body += `Score: ${r.percent}%  |  Verdict: ${r.passed?'PASSED':'FAILED'}  |  Pass mark: ${PASS_PERCENT}%\n`;
+  body += `MCQ : ${r.mcqCorrect}/${r.totalMcq}   Written: ${r.wriScore}/${r.totalWri}   Time: ${r.timeTaken}s\n\n`;
+
+  body += `=== OBJECTIVE Q&A ===\n`;
+  let mi=1;
+  answers.filter(a=>a.type==='mcq').forEach(a=>{
+    const userOpt = a.userIdx>=0 ? `${String.fromCharCode(65+a.userIdx)}) ${a.opts[a.userIdx]}` : 'NOT ANSWERED';
+    const corrOpt = `${String.fromCharCode(65+a.correctIdx)}) ${a.opts[a.correctIdx]}`;
+    const ok = a.userIdx===a.correctIdx ? '✔ correct' : '✘ wrong';
+    body += `\nQ${mi++} [${techName(a.tech)}] ${a.q}\n   Your answer: ${userOpt}\n   Correct    : ${corrOpt}  (${ok})\n`;
+  });
+
+  body += `\n=== WRITTEN Q&A ===\n`;
+  let wi=1;
+  answers.filter(a=>a.type==='written').forEach(a=>{
+    body += `\nW${wi++} [${techName(a.tech)}] ${a.q}\n   Your answer: ${a.userText||'(empty)'}\n   Hint/Key   : ${a.hint||'-'}\n`;
+  });
+
+  const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: `Quiz Result — ${student.name} — ${r.percent}% (${r.passed?'PASS':'FAIL'})`,
+    from_name: 'Ram Sir Quiz Platform',
+    name: student.name,
+    email: student.email,
+    message: body,
+  };
+
+  try{
+    const res = await fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const j = await res.json();
+    if(j.success){
+      alertBox.innerHTML = `<div class="alert ok"><i class="fa-solid fa-circle-check"></i> Result emailed successfully.</div>`;
+    } else {
+      alertBox.innerHTML = `<div class="alert err"><i class="fa-solid fa-triangle-exclamation"></i> Email failed: ${j.message||'unknown error'}</div>`;
+    }
+  } catch(err){
+    alertBox.innerHTML = `<div class="alert err"><i class="fa-solid fa-triangle-exclamation"></i> Network error sending email.</div>`;
+  }
+}
+</script>
+</body>
+</html>
